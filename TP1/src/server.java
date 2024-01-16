@@ -6,15 +6,15 @@ public class Serveur {
     private static ServerSocket Listener; 
     // Application Serveur 
     public static void main(String[] args) throwsException { 
-        // Compteur incrémentéà chaqueconnexion d'un client au serveur 
+        // Compteur incrémenté à chaque connexion d'un client au serveur 
         int clientNumber= 0; 
-        // Adresseet port du serveur 
+        // Adresse et port du serveur 
         // String serverAddress= "127.0.0.1"; 
-        // intserverPort= 5000; 
-        // Créationde la connexion pour communiquer avec les clients 
-        Listener= newServerSocket(); 
+        // int serverPort= 5000; 
+        // Création de la connexion pour communiquer avec les clients 
+        Listener = newServerSocket(); 
         Listener.setReuseAddress(true); 
-        InetAddressserverIP= InetAddress.getByName(serverAddress); 
+        InetAddress serverIP = InetAddress.getByName(serverAddress); 
         // Association de l'adresse et du port à la connexion 
         Listener.bind(newInetSocketAddress(serverIP, serverPort)); 
         System.out.format("The server is running on %s:%d%n", serverAddress, serverPort); 
