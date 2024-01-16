@@ -2,21 +2,21 @@ import java.net.InetAddress;
 import java.net.InetSocketAddress; 
 import java.net.ServerSocket; 
 
-public class Serveur { 
+public class Server { 
     private static ServerSocket Listener; 
     // Application Serveur 
-    public static void main(String[] args) throwsException { 
+    public static void main(String[] args) throws Exception { 
         // Compteur incrémenté à chaque connexion d'un client au serveur 
         int clientNumber= 0; 
         // Adresse et port du serveur 
-        // String serverAddress= "127.0.0.1"; 
-        // int serverPort= 5000; 
+        String serverAddress= "127.0.0.1"; 
+        int serverPort = 5000; 
         // Création de la connexion pour communiquer avec les clients 
-        Listener = newServerSocket(); 
+        Listener = new ServerSocket(); 
         Listener.setReuseAddress(true); 
         InetAddress serverIP = InetAddress.getByName(serverAddress); 
         // Association de l'adresse et du port à la connexion 
-        Listener.bind(newInetSocketAddress(serverIP, serverPort)); 
+        Listener.bind(new InetSocketAddress(serverIP, serverPort)); 
         System.out.format("The server is running on %s:%d%n", serverAddress, serverPort); 
         try { 
             // À chaque fois qu'un nouveau client se connecte, on exécute la fonction 
@@ -24,7 +24,7 @@ public class Serveur {
             while(true) { 
                 // Important : la fonction accept() est bloquante: attend qu'un prochain client se connecte 
                 // Une nouvelle connexion : on incémente le compteur clientNumber 
-                newClientHandler(Listener.accept(), clientNumber++).start();
+                new ClientHandler(Listener.accept(), clientNumber++).start();
             } 
         } finally { 
             // Fermeture de la connexion 
